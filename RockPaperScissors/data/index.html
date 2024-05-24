@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Rock Paper Scissors Wells GAME</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="data:,">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="jquery.min.js"></script>
+</head>
+
+<body>
+
+	<h2 class="headline">Rock Paper Scissors Wells GAME</h2>
+	<div class="content">
+
+		<div class="boxes">
+			<div class="box noShadow">
+				<select id="sspbAuswahl">
+					<option id="scissors">Scissors</option>
+					<option id="stone">Stone</option>
+					<option id="paper">Paper</option>
+					<option id="wells">Wells</option>
+				</select>
+				<br /><br />
+			</div>
+
+		</div>
+
+		<div class="box noShadow">
+			<button name="submitentry" class="button button_senden" onClick="submitGET()">Play !</button>
+		</div>
+
+	</div>
+
+	<hr />
+	<br />
+	<div id="statistic">
+		<h3 class="statistik">Results</h3>
+
+		<table class="ergebnisse">
+			<thead>
+				<tr>
+					<th>Rounds</th>
+					<th>Won</th>
+					<th>Lost</th>
+					<th>Tied</th>
+				</tr>
+			</thead>
+			<tbody id="scores">
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+</body>
+
+</html>
+
+<script>
+
+	var trCounter=0;
+
+	function submitGET() {
+		//we will pass data to our ESP32
+		var userInput = $("#sspbAuswahl").val().toLowerCase();
+		console.log(userInput);
+
+		$.get("?sspb=" + userInput, function (data) {
+			//here is nothing to do for us
+		});
+	}
+
+
+	if (!!window.EventSource) {
+
+		var source = new EventSource('/events');
+
+		source.addEventListener('open', function (e) {
+			console.log("Events Connected");
+		}, false);
+		source.addEventListener('error', function (e) {
+			if (e.target.readyState != EventSource.OPEN) {
+				console.log("Events Disconnected");
+			}
+		}, false);
+
+		source.addEventListener('message', function (e) {
+			console.log("message", e.data);
+		}, false);
+
+		source.addEventListener('won', function (e) {
+			console.log("won", e.data);
+
+			var row="<tr id='"+trCounter+"'><td class='smallNumbers'>"+trCounter+"</td>";
+			$(".ergebnisse").append(row);
+
+			row="<td class='smallNumbers'>"+e.data+"</td>";
+			$("#"+trCounter).append(row);
+			
+		}, false);
+
+		source.addEventListener('lost', function (e) {
+			
+			var row="<td class='smallNumbers'>"+e.data+"</td>";
+			$("#"+trCounter).append(row);
+			
+		}, false);
+
+		source.addEventListener('tied', function (e) {
+			row="<td class='smallNumbers'>"+e.data+"</td>";
+			$("#"+trCounter).append(row);
+
+			//close the line
+			$("#"+trCounter).append("</tr>");
+
+			
+			trCounter++;
+			
+		}, false);
+
+
+
+
+		
+		
+
+	}
+
+
+
+
+
+</script>

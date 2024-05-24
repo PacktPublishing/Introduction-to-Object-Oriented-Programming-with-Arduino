@@ -1,0 +1,99 @@
+html, table {
+  font-family: Helvetica;
+  display: inline-block;
+  
+  text-align: center;
+  font-size:1.1rem;
+}
+body{
+	 margin: 0;
+}
+h1, h2,h3{
+  color: #0F3376;
+  font-size: 2rem;
+}
+
+p, select{
+  font-size: 1.5rem;
+}
+
+.headline{
+  overflow:hidden;
+  background-color: #065786;
+  color: white; 
+  font-size: 2.5rem; 
+  padding: 20px;
+  margin:0;
+}
+
+.statistik{
+  background-color: #7f8fa6;
+  color: white; 
+  font-size: 1.5rem; 
+  padding: 15px;
+  margin:0;
+}
+
+.smallNumbers{
+	font-size: 1rem;
+	color: gray;
+}
+
+.content{
+	padding:20px;
+}
+
+.boxes { 
+    max-width: 300px; 
+    margin: 0 auto; 
+    display: grid; 
+    grid-gap: 2rem; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.box { 
+    background-color: white; 
+    box-shadow: 2px 2px 12px 1px rgba(140,140,140,.5); 
+  }
+
+.noShadow{
+	box-shadow: none;
+}  
+
+.spielstatus{
+	font-size:1.5rem;
+}
+
+td{
+	padding:30px;
+}	
+
+
+.button {
+  display: inline-block;
+  background-color: #008CBA;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  font-size: 1.5rem;
+  margin: 2px;
+  cursor: pointer;
+}
+
+
+input{
+	height:60px;
+	margin-bottom:15px;
+	width:90%;
+	font-size:30px;
+}
+input[type = submit] {
+	height:50px;
+	text-align:center;
+}
+
+label{
+	font-size:1.2rem;
+}
